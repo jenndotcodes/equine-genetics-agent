@@ -354,172 +354,165 @@ st.markdown(
 col_left, col_right = st.columns([1.1, 0.9], gap="large")
 
 with col_left:
-    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-    st.markdown("<div class='card-title'>Parental Configuration</div>", unsafe_allow_html=True)
+    st.subheader("Parental Configuration")
     
-    # Sire Genotype Inputs
-    sire_unknown = st.checkbox(
-        "Sire Genotype Unknown (Stallion)", 
-        value=False,
-        help="Estimate foal probability based on population average statistics for the sire."
-    )
-    
-    if not sire_unknown:
-        st.markdown("<div class='sub-card-title'>Sire Genes (Stallion)</div>", unsafe_allow_html=True)
-        col_s1, col_s2, col_s3 = st.columns(3)
-        with col_s1:
-            sire_E = st.selectbox(
-                "Extension (E/e Locus)", 
-                options=LOCI_GENOTYPES["E"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["E"][x],
-                index=1, 
-                key="sire_E"
-            )
-            sire_D = st.selectbox(
-                "Dun (D/d Locus)", 
-                options=LOCI_GENOTYPES["D"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["D"][x],
-                index=0, 
-                key="sire_D"
-            )
-            sire_prl = st.selectbox(
-                "Pearl (prl Locus)", 
-                options=LOCI_GENOTYPES["prl"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["prl"][x],
-                index=0, 
-                key="sire_prl"
-            )
-        with col_s2:
-            sire_A = st.selectbox(
-                "Agouti (A/a Locus)", 
-                options=LOCI_GENOTYPES["A"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["A"][x],
-                index=1, 
-                key="sire_A"
-            )
-            sire_Z = st.selectbox(
-                "Silver (Z/z Locus)", 
-                options=LOCI_GENOTYPES["Z"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["Z"][x],
-                index=0, 
-                key="sire_Z"
-            )
-            sire_G = st.selectbox(
-                "Grey (G/g Locus)", 
-                options=LOCI_GENOTYPES["G"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["G"][x],
-                index=0, 
-                key="sire_G"
-            )
-        with col_s3:
-            sire_Cr = st.selectbox(
-                "Cream (Cr Locus)", 
-                options=LOCI_GENOTYPES["Cr"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["Cr"][x],
-                index=0, 
-                key="sire_Cr"
-            )
-            sire_Ch = st.selectbox(
-                "Champagne (Ch Locus)", 
-                options=LOCI_GENOTYPES["Ch"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["Ch"][x],
-                index=0, 
-                key="sire_Ch"
-            )
-            sire_O = st.selectbox(
-                "Frame Overo (O Locus)", 
-                options=LOCI_GENOTYPES["O"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["O"][x],
-                index=0, 
-                key="sire_O"
-            )
-    else:
-        st.info("Stallion alleles are unknown.")
-        sire_E = sire_A = sire_Cr = sire_D = sire_Z = sire_Ch = sire_prl = sire_G = sire_O = None
-        
-    st.markdown("<hr style='border-color: rgba(255,255,255,0.05); margin: 20px 0;'>", unsafe_allow_html=True)
-        
-    # Dam Genotype Inputs
-    dam_unknown = st.checkbox(
-        "Dam Genotype Unknown (Mare)",
-        value=False,
-        help="Estimate foal probability based on population average statistics for the mare."
-    )
-    
-    if not dam_unknown:
-        st.markdown("<div class='sub-card-title'>Dam Genes (Mare)</div>", unsafe_allow_html=True)
-        col_d1, col_d2, col_d3 = st.columns(3)
-        with col_d1:
-            dam_E = st.selectbox(
-                "Extension (E/e Locus)", 
-                options=LOCI_GENOTYPES["E"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["E"][x],
-                index=2, 
-                key="dam_E"
-            )
-            dam_D = st.selectbox(
-                "Dun (D/d Locus)", 
-                options=LOCI_GENOTYPES["D"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["D"][x],
-                index=0, 
-                key="dam_D"
-            )
-            dam_prl = st.selectbox(
-                "Pearl (prl Locus)", 
-                options=LOCI_GENOTYPES["prl"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["prl"][x],
-                index=0, 
-                key="dam_prl"
-            )
-        with col_d2:
-            dam_A = st.selectbox(
-                "Agouti (A/a Locus)", 
-                options=LOCI_GENOTYPES["A"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["A"][x],
-                index=2, 
-                key="dam_A"
-            )
-            dam_Z = st.selectbox(
-                "Silver (Z/z Locus)", 
-                options=LOCI_GENOTYPES["Z"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["Z"][x],
-                index=0, 
-                key="dam_Z"
-            )
-            dam_G = st.selectbox(
-                "Grey (G/g Locus)", 
-                options=LOCI_GENOTYPES["G"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["G"][x],
-                index=0, 
-                key="dam_G"
-            )
-        with col_d3:
-            dam_Cr = st.selectbox(
-                "Cream (Cr Locus)", 
-                options=LOCI_GENOTYPES["Cr"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["Cr"][x],
-                index=0, 
-                key="dam_Cr"
-            )
-            dam_Ch = st.selectbox(
-                "Champagne (Ch Locus)", 
-                options=LOCI_GENOTYPES["Ch"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["Ch"][x],
-                index=0, 
-                key="dam_Ch"
-            )
-            dam_O = st.selectbox(
-                "Frame Overo (O Locus)", 
-                options=LOCI_GENOTYPES["O"], 
-                format_func=lambda x: GENOTYPE_DESCRIPTIONS["O"][x],
-                index=0, 
-                key="dam_O"
-            )
-    else:
-        st.info("Mare alleles are unknown.")
-        dam_E = dam_A = dam_Cr = dam_D = dam_Z = dam_Ch = dam_prl = dam_G = dam_O = None
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+    # Sire Expander
+    with st.expander("Sire Configuration (Stallion)", expanded=True):
+        sire_unknown = st.checkbox(
+            "Sire Genotype Unknown (Stallion)", 
+            value=False,
+            help="Estimate foal probability based on population average statistics for the sire."
+        )
+        if not sire_unknown:
+            col_s1, col_s2, col_s3 = st.columns(3)
+            with col_s1:
+                sire_E = st.selectbox(
+                    "Extension (E/e Locus)", 
+                    options=LOCI_GENOTYPES["E"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["E"][x],
+                    index=1, 
+                    key="sire_E"
+                )
+                sire_D = st.selectbox(
+                    "Dun (D/d Locus)", 
+                    options=LOCI_GENOTYPES["D"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["D"][x],
+                    index=0, 
+                    key="sire_D"
+                )
+                sire_prl = st.selectbox(
+                    "Pearl (prl Locus)", 
+                    options=LOCI_GENOTYPES["prl"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["prl"][x],
+                    index=0, 
+                    key="sire_prl"
+                )
+            with col_s2:
+                sire_A = st.selectbox(
+                    "Agouti (A/a Locus)", 
+                    options=LOCI_GENOTYPES["A"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["A"][x],
+                    index=1, 
+                    key="sire_A"
+                )
+                sire_Z = st.selectbox(
+                    "Silver (Z/z Locus)", 
+                    options=LOCI_GENOTYPES["Z"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["Z"][x],
+                    index=0, 
+                    key="sire_Z"
+                )
+                sire_G = st.selectbox(
+                    "Grey (G/g Locus)", 
+                    options=LOCI_GENOTYPES["G"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["G"][x],
+                    index=0, 
+                    key="sire_G"
+                )
+            with col_s3:
+                sire_Cr = st.selectbox(
+                    "Cream (Cr Locus)", 
+                    options=LOCI_GENOTYPES["Cr"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["Cr"][x],
+                    index=0, 
+                    key="sire_Cr"
+                )
+                sire_Ch = st.selectbox(
+                    "Champagne (Ch Locus)", 
+                    options=LOCI_GENOTYPES["Ch"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["Ch"][x],
+                    index=0, 
+                    key="sire_Ch"
+                )
+                sire_O = st.selectbox(
+                    "Frame Overo (O Locus)", 
+                    options=LOCI_GENOTYPES["O"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["O"][x],
+                    index=0, 
+                    key="sire_O"
+                )
+        else:
+            st.info("Stallion alleles are unknown.")
+            sire_E = sire_A = sire_Cr = sire_D = sire_Z = sire_Ch = sire_prl = sire_G = sire_O = None
+
+    # Dam Expander
+    with st.expander("Dam Configuration (Mare)", expanded=True):
+        dam_unknown = st.checkbox(
+            "Dam Genotype Unknown (Mare)",
+            value=False,
+            help="Estimate foal probability based on population average statistics for the mare."
+        )
+        if not dam_unknown:
+            col_d1, col_d2, col_d3 = st.columns(3)
+            with col_d1:
+                dam_E = st.selectbox(
+                    "Extension (E/e Locus)", 
+                    options=LOCI_GENOTYPES["E"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["E"][x],
+                    index=2, 
+                    key="dam_E"
+                )
+                dam_D = st.selectbox(
+                    "Dun (D/d Locus)", 
+                    options=LOCI_GENOTYPES["D"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["D"][x],
+                    index=0, 
+                    key="dam_D"
+                )
+                dam_prl = st.selectbox(
+                    "Pearl (prl Locus)", 
+                    options=LOCI_GENOTYPES["prl"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["prl"][x],
+                    index=0, 
+                    key="dam_prl"
+                )
+            with col_d2:
+                dam_A = st.selectbox(
+                    "Agouti (A/a Locus)", 
+                    options=LOCI_GENOTYPES["A"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["A"][x],
+                    index=2, 
+                    key="dam_A"
+                )
+                dam_Z = st.selectbox(
+                    "Silver (Z/z Locus)", 
+                    options=LOCI_GENOTYPES["Z"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["Z"][x],
+                    index=0, 
+                    key="dam_Z"
+                )
+                dam_G = st.selectbox(
+                    "Grey (G/g Locus)", 
+                    options=LOCI_GENOTYPES["G"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["G"][x],
+                    index=0, 
+                    key="dam_G"
+                )
+            with col_d3:
+                dam_Cr = st.selectbox(
+                    "Cream (Cr Locus)", 
+                    options=LOCI_GENOTYPES["Cr"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["Cr"][x],
+                    index=0, 
+                    key="dam_Cr"
+                )
+                dam_Ch = st.selectbox(
+                    "Champagne (Ch Locus)", 
+                    options=LOCI_GENOTYPES["Ch"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["Ch"][x],
+                    index=0, 
+                    key="dam_Ch"
+                )
+                dam_O = st.selectbox(
+                    "Frame Overo (O Locus)", 
+                    options=LOCI_GENOTYPES["O"], 
+                    format_func=lambda x: GENOTYPE_DESCRIPTIONS["O"][x],
+                    index=0, 
+                    key="dam_O"
+                )
+        else:
+            st.info("Mare alleles are unknown.")
+            dam_E = dam_A = dam_Cr = dam_D = dam_Z = dam_Ch = dam_prl = dam_G = dam_O = None
 
     # Perform calculations based on inputs
     results = None
@@ -547,170 +540,166 @@ with col_left:
         
     # Display Results in Left Column
     if results is not None:
-        st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-        st.markdown("<div class='card-title'>Foal Phenotype Probabilities</div>", unsafe_allow_html=True)
-        
-        def display_odds(odds_dict: dict):
-            # Sort odds descending
-            sorted_odds = sorted(odds_dict.items(), key=lambda x: float(x[1].replace("%", "")), reverse=True)
-            for pheno, prob_str in sorted_odds:
-                prob_val = float(prob_str.replace("%", ""))
-                
-                # Dynamic CSS color mapping
-                p_lower = pheno.lower()
-                if "bay" in p_lower:
-                    css_class = "pheno-bay"
-                elif "black" in p_lower or "grullo" in p_lower:
-                    css_class = "pheno-solid-black"
-                elif "chestnut" in p_lower or "palomino" in p_lower or "cremello" in p_lower or "gold" in p_lower or "apricot" in p_lower:
-                    css_class = "pheno-chestnut"
-                elif "lethal" in p_lower:
-                    css_class = "pheno-solid-black"
-                else:
-                    css_class = "pheno-unknown"
-                
-                st.markdown(
-                    f"""
-                    <div class="custom-progress-container">
-                        <div class="custom-progress-label-row">
-                            <span style="color: #ffffff; font-weight: 700;">{pheno}</span>
-                            <span style="color: #ffffff; font-weight: 700;">{prob_str}</span>
-                        </div>
-                        <div class="custom-progress-bg">
-                            <div class="custom-progress-fill {css_class}" style="width: {prob_val}%;"></div>
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-        def display_registry_notes(odds_dict: dict):
-            notes_shown = set()
-            for pheno in odds_dict.keys():
-                pheno_notes = retrieve_breed_registry_notes(pheno)
-                for key, data in pheno_notes.items():
-                    if key not in notes_shown:
-                        notes_shown.add(key)
-                        st.markdown(
-                            f"""
-                            <div class="registry-note-card">
-                                <div class="registry-note-title">📖 Registry Note: {data['title']}</div>
-                                <div style="color: #cbd5e1; margin-bottom: 8px;">{data['description']}</div>
-                                <div style="color: #94a3b8; font-style: italic; font-size: 11px;">History: {data['historical_context']}</div>
+        with st.container(border=True):
+            st.subheader("Foal Phenotype Probabilities")
+            
+            def display_odds(odds_dict: dict):
+                # Sort odds descending
+                sorted_odds = sorted(odds_dict.items(), key=lambda x: float(x[1].replace("%", "")), reverse=True)
+                for pheno, prob_str in sorted_odds:
+                    prob_val = float(prob_str.replace("%", ""))
+                    
+                    # Dynamic CSS color mapping
+                    p_lower = pheno.lower()
+                    if "bay" in p_lower:
+                        css_class = "pheno-bay"
+                    elif "black" in p_lower or "grullo" in p_lower:
+                        css_class = "pheno-solid-black"
+                    elif "chestnut" in p_lower or "palomino" in p_lower or "cremello" in p_lower or "gold" in p_lower or "apricot" in p_lower:
+                        css_class = "pheno-chestnut"
+                    elif "lethal" in p_lower:
+                        css_class = "pheno-solid-black"
+                    else:
+                        css_class = "pheno-unknown"
+                    
+                    st.markdown(
+                        f"""
+                        <div class="custom-progress-container">
+                            <div class="custom-progress-label-row">
+                                <span style="color: #ffffff; font-weight: 700;">{pheno}</span>
+                                <span style="color: #ffffff; font-weight: 700;">{prob_str}</span>
                             </div>
-                            """,
-                            unsafe_allow_html=True
-                        )
+                            <div class="custom-progress-bg">
+                                <div class="custom-progress-fill {css_class}" style="width: {prob_val}%;"></div>
+                            </div>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
 
-        if not sire_unknown and not dam_unknown:
-            # Check for double Overo carrier cross
-            if sire_O == "On" and dam_O == "On":
-                st.error("CRITICAL CRITIQUE ALERT: Lethal White Syndrome Hazard (25% Probability)")
-                lws_notes = retrieve_breed_registry_notes("Lethal White Syndrome (Fatal)")
-                if "Lethal White Syndrome (Fatal)" in lws_notes:
-                    data = lws_notes["Lethal White Syndrome (Fatal)"]
-                    st.info(f"📖 **Registry & Safety Guidelines:**\n\n{data['description']}\n\n*Historical/Registry Context:* {data['historical_context']}")
-            else:
-                # Audit safety (Critique Agent integration)
-                safety_audit = validate_safety_compliance(results)
-                if not safety_audit["compliant"]:
-                    st.markdown(f"<div class='safety-alert-high'>{safety_audit['message']}</div>", unsafe_allow_html=True)
-                else:
-                    st.markdown(f"<div class='safety-alert-green'>🛡️ {safety_audit['message']}</div>", unsafe_allow_html=True)
-                
-            display_odds(results)
-            display_registry_notes(results)
-        else:
-            # Audit scenarios (Critique Agent scenario list integration)
-            audited_scenarios = validate_scenarios_compliance(results)
-            unknown_label = "Stallion" if sire_unknown else "Mare"
-            for idx, scenario in enumerate(audited_scenarios):
-                st.markdown(f"<div class='sub-card-title'>Scenario {idx + 1}: Unknown {unknown_label} is {scenario['profile']}</div>", unsafe_allow_html=True)
-                
-                # Check for double Overo carrier cross in this scenario
-                known_O_val = dam_O if sire_unknown else sire_O
-                if known_O_val == "On" and "On" in scenario["profile"]:
+            def display_registry_notes(odds_dict: dict):
+                notes_shown = set()
+                for pheno in odds_dict.keys():
+                    pheno_notes = retrieve_breed_registry_notes(pheno)
+                    for key, data in pheno_notes.items():
+                        if key not in notes_shown:
+                            notes_shown.add(key)
+                            st.markdown(
+                                f"""
+                                <div class="registry-note-card">
+                                    <div class="registry-note-title">📖 Registry Note: {data['title']}</div>
+                                    <div style="color: #cbd5e1; margin-bottom: 8px;">{data['description']}</div>
+                                    <div style="color: #94a3b8; font-style: italic; font-size: 11px;">History: {data['historical_context']}</div>
+                                </div>
+                                """,
+                                unsafe_allow_html=True
+                            )
+
+            if not sire_unknown and not dam_unknown:
+                # Check for double Overo carrier cross
+                if sire_O == "On" and dam_O == "On":
                     st.error("CRITICAL CRITIQUE ALERT: Lethal White Syndrome Hazard (25% Probability)")
                     lws_notes = retrieve_breed_registry_notes("Lethal White Syndrome (Fatal)")
                     if "Lethal White Syndrome (Fatal)" in lws_notes:
                         data = lws_notes["Lethal White Syndrome (Fatal)"]
                         st.info(f"📖 **Registry & Safety Guidelines:**\n\n{data['description']}\n\n*Historical/Registry Context:* {data['historical_context']}")
                 else:
-                    safety_audit = scenario["safety"]
+                    # Audit safety (Critique Agent integration)
+                    safety_audit = validate_safety_compliance(results)
                     if not safety_audit["compliant"]:
                         st.markdown(f"<div class='safety-alert-high'>{safety_audit['message']}</div>", unsafe_allow_html=True)
                     else:
                         st.markdown(f"<div class='safety-alert-green'>🛡️ {safety_audit['message']}</div>", unsafe_allow_html=True)
-                
-                display_odds(scenario["odds"])
-                display_registry_notes(scenario["odds"])
-            
-        st.markdown("</div>", unsafe_allow_html=True)
+                    
+                display_odds(results)
+                display_registry_notes(results)
+            else:
+                # Audit scenarios (Critique Agent scenario list integration)
+                audited_scenarios = validate_scenarios_compliance(results)
+                unknown_label = "Stallion" if sire_unknown else "Mare"
+                for idx, scenario in enumerate(audited_scenarios):
+                    st.markdown(f"<div class='sub-card-title'>Scenario {idx + 1}: Unknown {unknown_label} is {scenario['profile']}</div>", unsafe_allow_html=True)
+                    
+                    # Check for double Overo carrier cross in this scenario
+                    known_O_val = dam_O if sire_unknown else sire_O
+                    if known_O_val == "On" and "On" in scenario["profile"]:
+                        st.error("CRITICAL CRITIQUE ALERT: Lethal White Syndrome Hazard (25% Probability)")
+                        lws_notes = retrieve_breed_registry_notes("Lethal White Syndrome (Fatal)")
+                        if "Lethal White Syndrome (Fatal)" in lws_notes:
+                            data = lws_notes["Lethal White Syndrome (Fatal)"]
+                            st.info(f"📖 **Registry & Safety Guidelines:**\n\n{data['description']}\n\n*Historical/Registry Context:* {data['historical_context']}")
+                    else:
+                        safety_audit = scenario["safety"]
+                        if not safety_audit["compliant"]:
+                            st.markdown(f"<div class='safety-alert-high'>{safety_audit['message']}</div>", unsafe_allow_html=True)
+                        else:
+                            st.markdown(f"<div class='safety-alert-green'>🛡️ {safety_audit['message']}</div>", unsafe_allow_html=True)
+                    
+                    display_odds(scenario["odds"])
+                    display_registry_notes(scenario["odds"])
         
         # Detailed Genotypes breakdown (Only possible when both parents are known)
-        st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-        st.markdown("<div class='card-title'>Offspring Locus Breakdown</div>", unsafe_allow_html=True)
-        
-        if not sire_unknown and not dam_unknown:
-            loci_names = {
-                "E": "Extension (E/e)",
-                "A": "Agouti (A/a)",
-                "Cr": "Cream (Cr)",
-                "D": "Dun (D/d)",
-                "Z": "Silver (Z/z)",
-                "Ch": "Champagne (Ch)",
-                "prl": "Pearl (prl)",
-                "G": "Grey (G/g)",
-                "O": "Frame Overo (O)",
-            }
+        with st.container(border=True):
+            st.subheader("Offspring Locus Breakdown")
             
-            sire_genes = {"E": sire_E, "A": sire_A, "Cr": sire_Cr, "D": sire_D, "Z": sire_Z, "Ch": sire_Ch, "prl": sire_prl, "G": sire_G, "O": sire_O}
-            dam_genes = {"E": dam_E, "A": dam_A, "Cr": dam_Cr, "D": dam_D, "Z": dam_Z, "Ch": dam_Ch, "prl": dam_prl, "G": dam_G, "O": dam_O}
-            
-            table_rows = ""
-            for locus, name in loci_names.items():
-                s_val = sire_genes[locus]
-                d_val = dam_genes[locus]
-                outcomes = run_punnett_square(s_val, d_val)
+            if not sire_unknown and not dam_unknown:
+                loci_names = {
+                    "E": "Extension (E/e)",
+                    "A": "Agouti (A/a)",
+                    "Cr": "Cream (Cr)",
+                    "D": "Dun (D/d)",
+                    "Z": "Silver (Z/z)",
+                    "Ch": "Champagne (Ch)",
+                    "prl": "Pearl (prl)",
+                    "G": "Grey (G/g)",
+                    "O": "Frame Overo (O)",
+                }
                 
-                # Count frequencies
-                counts = {}
-                for o in outcomes:
-                    counts[o] = counts.get(o, 0) + 25.0
+                sire_genes = {"E": sire_E, "A": sire_A, "Cr": sire_Cr, "D": sire_D, "Z": sire_Z, "Ch": sire_Ch, "prl": sire_prl, "G": sire_G, "O": sire_O}
+                dam_genes = {"E": dam_E, "A": dam_A, "Cr": dam_Cr, "D": dam_D, "Z": dam_Z, "Ch": dam_Ch, "prl": dam_prl, "G": dam_G, "O": dam_O}
                 
-                outcome_strs = []
-                for gen, pct in sorted(counts.items(), key=lambda x: x[1], reverse=True):
-                    outcome_strs.append(f"{gen}: {pct:.0f}%")
-                
-                table_rows += (
-                    f'<tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">'
-                    f'<td style="padding: 10px 0; font-weight: 700; color: #ffffff;">{name}</td>'
-                    f'<td style="padding: 10px 0; font-family: \'JetBrains Mono\', monospace; color: #cbd5e1;">{s_val} × {d_val}</td>'
-                    f'<td style="padding: 10px 0; text-align: right; font-weight: bold; color: #38bdf8;">{", ".join(outcome_strs)}</td>'
+                table_rows = ""
+                for locus, name in loci_names.items():
+                    s_val = sire_genes[locus]
+                    d_val = dam_genes[locus]
+                    outcomes = run_punnett_square(s_val, d_val)
+                    
+                    # Count frequencies
+                    counts = {}
+                    for o in outcomes:
+                        counts[o] = counts.get(o, 0) + 25.0
+                    
+                    outcome_strs = []
+                    for gen, pct in sorted(counts.items(), key=lambda x: x[1], reverse=True):
+                        outcome_strs.append(f"{gen}: {pct:.0f}%")
+                    
+                    table_rows += (
+                        f'<tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">'
+                        f'<td style="padding: 10px 0; font-weight: 700; color: #ffffff;">{name}</td>'
+                        f'<td style="padding: 10px 0; font-family: \'JetBrains Mono\', monospace; color: #cbd5e1;">{s_val} × {d_val}</td>'
+                        f'<td style="padding: 10px 0; text-align: right; font-weight: bold; color: #38bdf8;">{", ".join(outcome_strs)}</td>'
+                        f'</tr>'
+                    )
+                    
+                st.markdown(
+                    f'<table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #ffffff;">'
+                    f'<thead>'
+                    f'<tr style="border-bottom: 2px solid rgba(255,255,255,0.15); color: #cbd5e1; text-align: left; font-weight: 700;">'
+                    f'<th style="padding-bottom: 8px;">Locus</th>'
+                    f'<th style="padding-bottom: 8px;">Cross</th>'
+                    f'<th style="padding-bottom: 8px; text-align: right;">Offspring Probabilities</th>'
                     f'</tr>'
+                    f'</thead>'
+                    f'<tbody>{table_rows}</tbody>'
+                    f'</table>',
+                    unsafe_allow_html=True
                 )
-                
-            st.markdown(
-                f'<table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #ffffff;">'
-                f'<thead>'
-                f'<tr style="border-bottom: 2px solid rgba(255,255,255,0.15); color: #cbd5e1; text-align: left; font-weight: 700;">'
-                f'<th style="padding-bottom: 8px;">Locus</th>'
-                f'<th style="padding-bottom: 8px;">Cross</th>'
-                f'<th style="padding-bottom: 8px; text-align: right;">Offspring Probabilities</th>'
-                f'</tr>'
-                f'</thead>'
-                f'<tbody>{table_rows}</tbody>'
-                f'</table>',
-                unsafe_allow_html=True
-            )
-        else:
-            st.write("⚠️ Locus details are unavailable when a parent is unknown. Review the branching scenarios above.")
-            
-        st.markdown("</div>", unsafe_allow_html=True)
+            else:
+                st.write("⚠️ Locus details are unavailable when a parent is unknown. Review the branching scenarios above.")
 
 with col_right:
     # Agent Tracking Log layout
-    st.markdown("<h3 style='margin-bottom: 5px; font-weight: 600; font-size: 20px; color: #ffffff;'>🛰️ Antigravity Agent Tracking Log</h3>", unsafe_allow_html=True)
+    st.subheader("🛰️ Antigravity Agent Tracking Log")
     st.caption("Active trace of the autonomous agent's genetic simulation pipeline")
     
     # Generate dynamic log events
@@ -795,5 +784,6 @@ with col_right:
     cursor_time = t_now.strftime("%H:%M:%S.%f")[:-3]
     log_text += f"[{cursor_time}] [status] Agent listening for user adjustments..."
     
-    # Render the logs cleanly inside a bash code block representing a terminal monitor
-    st.code(log_text, language='bash')
+    # Render the logs cleanly inside st.container(border=True) using an st.code block
+    with st.container(border=True):
+        st.code(log_text, language='bash')
