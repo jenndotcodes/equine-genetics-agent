@@ -1,0 +1,37 @@
+{
+  "Lethal White Syndrome (Fatal)": {
+    "title": "Lethal White Syndrome (LWS)",
+    "description": "Lethal White Syndrome (LWS) is a fatal genetic disorder occurring when a foal inherits two copies of the mutated Frame Overo allele (OO). Foals are born completely or nearly all white, but suffer from an underdeveloped intestinal tract (ileocolonic aganglionosis) and cannot pass food, leading to death or humane euthanasia within 24-48 hours. Breeders must test all potential carriers and avoid mating two Frame Overo (On) horses.",
+    "historical_context": "First described scientifically in the mid-20th century as paint and pinto breeding gained popularity. Most equine registries (AQHA, APHA) mandate genetic testing for the Frame Overo mutation (EDNRB gene) before breeding to prevent this tragedy."
+  },
+  "Grey": {
+    "title": "Grey progressive whitening mask",
+    "description": "Grey is a dominant modifier (GG or Gn) that causes progressive depigmentation of the coat. The horse is born a normal base/diluted color and gradually turns white with age, although its skin remains dark. Melanosomes gradually empty, mimicking human greying but at an accelerated rate.",
+    "historical_context": "The Grey mutation is highly ancient and tracing back to a common founder. It is prized historically in royal breeds such as the Lipizzaner (associated with the Spanish Riding School of Vienna) and Andalusians."
+  },
+  "Silver": {
+    "title": "Silver Dapple modifier",
+    "description": "Silver (ZZ or Zn) is a dominant modifier that acts exclusively on black pigment, diluting it to a chocolate or silver dapple color, and lightening mane/tail hair to flaxen. It does not affect red pigment (chestnut horses remain unaffected). Can be associated with congenital pseudocoloboma eye defects in homozygous form.",
+    "historical_context": "Deeply associated with the Rocky Mountain Horse breed and Shetland ponies. Historically prized in North America for producing the unique 'chocolate' coat with a white mane and tail."
+  },
+  "Cream": {
+    "title": "Cream dilution locus",
+    "description": "Cream (Cr) is an incomplete dominant dilution gene. A single copy (Crn) dilutes red pigment to gold (Palomino) or yellow-gold (Buckskin). Two copies (CrCr) dilute both red and black pigments heavily, creating double-diluted coats with blue eyes and pink skin (Cremello, Perlino, Smoky Cream).",
+    "historical_context": "Palomino horses have been prized since antiquity, appearing frequently in art and literature associated with royalty in Spain and ancient Greece. Queen Isabella of Spain famously encouraged the breeding of palominos, leading to the name 'Isabelline' in Europe."
+  },
+  "Dun": {
+    "title": "Dun primitive dilution",
+    "description": "Dun (D) is a dominant primitive dilution gene. It dilutes the base coat (turning chestnut to red dun, bay to dun, black to grullo) while leaving primitive markings undiluted, including a distinct dorsal stripe, zebra-like leg bars, shoulder shadows, and cobwebbing on the forehead.",
+    "historical_context": "Dun is considered the wild-type coat pattern of the ancestral horse (Equus caballus) and is found in primitive horse breeds like the Przewalski's horse and Fjord horses of Norway."
+  },
+  "Champagne": {
+    "title": "Champagne dilution",
+    "description": "Champagne (Ch) is a dominant dilution gene that lightens the coat, gives the hair a distinct metallic sheen, turns the skin pinkish with dark freckles, and lightens the eyes to hazel or green.",
+    "historical_context": "First scientifically recognized in the 1990s in the Tennessee Walking Horse registry. It was historically mistaken for cream or dun until genetic markers confirmed it as a distinct locus."
+  },
+  "Pearl": {
+    "title": "Pearl dilution (Apricot factor)",
+    "description": "Pearl (prl) is a recessive dilution gene. It requires two copies (prlprl) to dilute red pigment to an apricot color. However, it exhibits co-dominance with Cream: a horse with one copy of Cream and one copy of Pearl (Crn/prln) displays a diluted 'cream-pearl' phenotype resembling double-cream dilution.",
+    "historical_context": "Originally called the 'Apricot factor' in Quarter Horses. It was traced back to a founder line in Iberian horses (Andalusians and Lusitanos) where it was historically highly guarded."
+  }
+}
