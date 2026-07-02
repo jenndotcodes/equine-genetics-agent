@@ -1,4 +1,10 @@
 # tests/test_genetics.py
+"""
+Unit Testing Suite for Genetics Engine
+-------------------------------------
+Performs comprehensive testing on helper segregation functions, Punnett square
+crossover logic, phenotype resolution masks, and safety auditor checks.
+"""
 import pytest
 from tools.genetics_engine import (
     split_genotype,
@@ -9,6 +15,11 @@ from tools.genetics_engine import (
 from tools.critique_agent import validate_safety_compliance
 
 def test_split_genotype():
+    """
+    Validates splitting of genotypes into individual alleles.
+    Verifies that multi-character designations (like 'Cr', 'prl') are correctly handled
+    alongside traditional single-character representations (like 'E', 'e').
+    """
     # Test multi-character genotypes
     assert split_genotype("CrCr") == ("Cr", "Cr")
     assert split_genotype("Crn") == ("Cr", "n")
@@ -19,6 +30,10 @@ def test_split_genotype():
     assert split_genotype("nn") == ("n", "n")
 
 def test_sort_alleles():
+    """
+    Verifies sorting logic for alleles based on biological dominance.
+    Ensures that dominant/mutant alleles come first, and wild-type ('n') comes last.
+    """
     # Dominant alleles first
     assert sort_alleles("e", "E") == ["E", "e"]
     assert sort_alleles("n", "Cr") == ["Cr", "n"]
@@ -28,6 +43,10 @@ def test_sort_alleles():
     assert sort_alleles("Cr", "n") == ["Cr", "n"]
 
 def test_run_punnett_square():
+    """
+    Validates Mendelian 2x2 Punnett square crossover outcomes.
+    Checks heterozygous x heterozygous (Ee x Ee) and homozygous dominant x homozygous recessive crosses.
+    """
     # Ee x Ee heterozygous cross should yield 4 combinations
     res1 = run_punnett_square("Ee", "Ee")
     assert len(res1) == 4
@@ -38,6 +57,14 @@ def test_run_punnett_square():
     assert res2 == ["Ee", "Ee", "Ee", "Ee"]
 
 def test_get_phenotype():
+    """
+    Thoroughly tests the sequential epistasis rules in get_phenotype:
+    1. Base Coat Resolution (Black, Bay, Chestnut)
+    2. Cream and Pearl Co-dominance Dilutions
+    3. Progressive Greying Mask override
+    4. Silver Modifier restrictions (black base only)
+    5. Lethal White Syndrome (OO homozygous Overo check)
+    """
     # Solid black base (EE, aa, and no dilutions/modifiers)
     assert get_phenotype({
         "E": "EE", "A": "aa", "Cr": "nn", "D": "nn", "Z": "nn", "Ch": "nn", "prl": "nn", "G": "nn", "O": "nn"
@@ -74,6 +101,10 @@ def test_get_phenotype():
     }) == "Lethal White Syndrome (Fatal)"
 
 def test_validate_safety_compliance():
+    """
+    Validates Critique Agent safety compliance intercept rules.
+    Verifies that non-zero probabilities of Lethal White Syndrome trigger high-priority alerts.
+    """
     # Safe outcome
     safe_odds = {"Bay": "75.0%", "Chestnut": "25.0%"}
     assert validate_safety_compliance(safe_odds)["compliant"] is True
