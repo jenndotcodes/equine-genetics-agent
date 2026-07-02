@@ -25,6 +25,7 @@ The workspace is organized as follows:
 │   └── critique_agent.py         # Safety auditor checking for lethal genetic crosses
 ├── app.py                        # Streamlit interactive dashboard & agent log monitor
 ├── breed_registry_notes.json     # Grounded biological and historical reference data
+├── cli.py                        # Standalone command-line interface tool
 ├── deploy.sh                     # Google Cloud Run deployment script
 ├── Dockerfile                    # Containerization script for production environment
 ├── mcp_server.py                 # Standalone Model Context Protocol (MCP) server
@@ -38,6 +39,7 @@ The workspace is organized as follows:
 - **Critique Agent (`tools/critique_agent.py`)**: An validation layer that intercepts calculated probability payloads. It runs safety audits to flag hazardous crosses—such as the homozygous Frame Overo (`OO`) Lethal White Syndrome (LWS) condition—and blocks standard outputs to return high-priority veterinary warnings.
 - **Breed Registry Notes (`breed_registry_notes.json`)**: A database of historical and registry information matched dynamically against resolved offspring phenotypes.
 - **MCP Server (`mcp_server.py`)**: Exposes genetics computation tools and safety compliance standards over the Model Context Protocol (MCP) using the `mcp` SDK.
+- **Command-line Interface (`cli.py`)**: Provides a standalone terminal interface using python's built-in `argparse` to calculate offspring percentages and report critique warnings.
 
 ---
 
