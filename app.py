@@ -637,6 +637,12 @@ with col_left:
                     
                     display_odds(scenario["odds"])
                     display_registry_notes(scenario["odds"])
+            
+            # Add bottom padding inside the container
+            st.markdown("<div style='padding-bottom: 15px;'></div>", unsafe_allow_html=True)
+            
+        # Spacer between results containers
+        st.markdown("<div style='margin-bottom: 25px;'></div>", unsafe_allow_html=True)
         
         # Detailed Genotypes breakdown (Only possible when both parents are known)
         with st.container(border=True):
