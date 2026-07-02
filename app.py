@@ -129,6 +129,11 @@ st.markdown(
         padding: 0 !important;
     }
 
+    div[data-testid="stExpander"] details {
+        border: none !important;
+        background-color: transparent !important;
+    }
+
     /* Expander inner content padding alignment */
     div[data-testid="stExpanderDetails"] {
         padding: 0px 24px 24px 24px !important; /* Equal padding combined with header summary */
