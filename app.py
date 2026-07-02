@@ -876,7 +876,7 @@ with col_right:
             background-color: #121414;
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
-            padding: 24px !important;
+            padding: 0px !important;
             border-radius: 8px;
             min-height: 680px;
             max-height: 680px;
@@ -885,6 +885,6 @@ with col_right:
             word-wrap: break-word;
             border: 1px solid rgba(143, 179, 148, 0.2);
             line-height: 1.6;
-        ">{log_html_content}</div>
+        "><div style="padding: 24px !important;">{log_html_content}</div></div>
         """
         st.markdown(log_html, unsafe_allow_html=True)
