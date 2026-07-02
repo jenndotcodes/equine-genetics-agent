@@ -784,6 +784,22 @@ with col_right:
     cursor_time = t_now.strftime("%H:%M:%S.%f")[:-3]
     log_text += f"[{cursor_time}] [status] Agent listening for user adjustments..."
     
-    # Render the logs cleanly inside st.container(border=True) using an st.code block
+    # Render the logs cleanly inside st.container(border=True) using a custom styled HTML container
     with st.container(border=True):
-        st.code(log_text, language='bash')
+        log_html = f"""
+        <div style="
+            background-color: #ffffff;
+            color: #1e2222;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 480px;
+            max-height: 600px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid #cbd5e1;
+        ">{log_text}</div>
+        """
+        st.markdown(log_html, unsafe_allow_html=True)
