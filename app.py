@@ -150,11 +150,12 @@ st.markdown(
         border-radius: 12px !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
         margin-bottom: 24px !important; /* Unified spacing margin */
+        padding: 24px !important; /* Force equal padding on the container itself to keep all sides uniform */
     }
 
     /* Adjust container padding to be exactly 24px on all 4 sides */
     div[data-testid="stVerticalBlockBorderWrapper"] > div {
-        padding: 24px !important;
+        padding: 0px !important;
     }
 
     /* High contrast widget labels styled in sage green */
