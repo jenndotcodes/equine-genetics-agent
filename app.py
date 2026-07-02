@@ -98,6 +98,65 @@ st.markdown(
         color: #f0f3f1 !important;
     }
 
+    /* Ensure the page wrapper has equal padding on all four sides between widgets and outer container */
+    .block-container {
+        padding: 3rem !important;
+    }
+
+    /* Premium custom scrollbar styling */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #1e2222;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #8fb394;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #b89bf0;
+    }
+
+    /* Expander Container Styling */
+    div[data-testid="stExpander"] {
+        background-color: #282c2c !important;
+        border: 1px solid rgba(143, 179, 148, 0.2) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+        margin-bottom: 24px !important; /* Unified spacing margin */
+        padding: 0 !important;
+    }
+
+    /* Expander inner content padding alignment */
+    div[data-testid="stExpanderDetails"] {
+        padding: 0px 24px 24px 24px !important; /* Equal padding combined with header summary */
+        background-color: #282c2c !important;
+        border-radius: 0 0 12px 12px !important;
+    }
+
+    /* Expander header customization */
+    div[data-testid="stExpander"] summary {
+        padding: 24px 24px 24px 24px !important; /* Perfect 24px padding on all sides when collapsed */
+        color: #8fb394 !important;
+        font-weight: bold !important;
+    }
+
+    /* Native Container Box Border Styling */
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        background-color: #282c2c !important;
+        border: 1px solid rgba(143, 179, 148, 0.2) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+        margin-bottom: 24px !important; /* Unified spacing margin */
+    }
+
+    /* Adjust container padding to be exactly 24px on all 4 sides */
+    div[data-testid="stVerticalBlockBorderWrapper"] > div {
+        padding: 24px !important;
+    }
+
     /* High contrast widget labels styled in sage green */
     label, [data-testid="stWidgetLabel"] p {
         color: #8fb394 !important;
@@ -107,25 +166,16 @@ st.markdown(
         margin-bottom: 6px !important;
     }
 
-    /* Glassmorphic genetic card */
-    .glass-card {
-        background: rgba(0, 0, 0, 0.28); /* Slightly darker for better text contrast */
-        border: 1px solid rgba(255, 255, 255, 0.12); /* Increased border contrast */
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.25);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        margin-bottom: 24px;
-    }
-
-    .card-title {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #f0f3f1 !important;
-        border-bottom: 2px solid #8fb394;
-        padding-bottom: 8px;
+    /* Styled subheader components (h3) */
+    h3 {
+        color: #8fb394 !important;
+        font-family: 'Outfit', sans-serif;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        margin-top: 0px !important;
+        margin-bottom: 16px !important;
+        padding-bottom: 8px !important;
+        border-bottom: 1px solid rgba(143, 179, 148, 0.2) !important;
         letter-spacing: 0.5px;
     }
 
@@ -200,7 +250,7 @@ st.markdown(
     }
 
     .log-time {
-        color: #a1a1aa;
+        color: #8a99ad;
         font-size: 11px;
         margin-right: 12px;
         margin-top: 2px;
@@ -218,28 +268,34 @@ st.markdown(
         letter-spacing: 0.5px;
     }
 
-    .tag-thought {
-        background-color: rgba(187, 134, 252, 0.18);
-        color: #d8b4fe;
-        border: 1px solid rgba(187, 134, 252, 0.4);
+    .tag-thought, .tag-status {
+        background-color: rgba(184, 155, 240, 0.12) !important;
+        color: #b89bf0 !important;
+        border: 1px solid rgba(184, 155, 240, 0.35) !important;
     }
 
     .tag-comp {
-        background-color: rgba(3, 169, 244, 0.18);
-        color: #38bdf8;
-        border: 1px solid rgba(3, 169, 244, 0.4);
+        background-color: rgba(143, 179, 148, 0.12) !important;
+        color: #8fb394 !important;
+        border: 1px solid rgba(143, 179, 148, 0.35) !important;
     }
 
     .tag-action {
-        background-color: rgba(0, 230, 118, 0.18);
-        color: #4ade80;
-        border: 1px solid rgba(0, 230, 118, 0.4);
+        background-color: rgba(56, 189, 248, 0.12) !important;
+        color: #38bdf8 !important;
+        border: 1px solid rgba(56, 189, 248, 0.35) !important;
     }
 
     .tag-query {
-        background-color: rgba(255, 152, 0, 0.18);
-        color: #fb923c;
-        border: 1px solid rgba(255, 152, 0, 0.4);
+        background-color: rgba(251, 146, 60, 0.12) !important;
+        color: #fb923c !important;
+        border: 1px solid rgba(251, 146, 60, 0.35) !important;
+    }
+
+    .tag-success {
+        background-color: rgba(74, 222, 128, 0.12) !important;
+        color: #4ade80 !important;
+        border: 1px solid rgba(74, 222, 128, 0.35) !important;
     }
 
     .log-text {
@@ -250,7 +306,6 @@ st.markdown(
     .cursor-blink {
         animation: blink 1s step-end infinite;
         font-weight: bold;
-        color: #d8b4fe;
     }
 
     @keyframes blink {
@@ -269,7 +324,7 @@ st.markdown(
         font-weight: 700;
         margin-bottom: 6px;
         font-size: 14px;
-        color: #ffffff !important;
+        color: #f0f3f1 !important;
     }
     
     .custom-progress-bg {
@@ -292,35 +347,37 @@ st.markdown(
     .pheno-chestnut { background: linear-gradient(90deg, #ea580c, #9a3412); }
     .pheno-unknown { background: linear-gradient(90deg, #64748b, #334155); }
 
-    /* Safety Compliance Visual Alert styles */
+    /* Safety Compliance Visual Alert styles with standardized padding and margins */
     .safety-alert-high {
-        background-color: rgba(239, 68, 68, 0.18) !important;
+        background-color: rgba(239, 68, 68, 0.1) !important;
         color: #fca5a5 !important;
-        border: 2px solid rgba(239, 68, 68, 0.5) !important;
-        border-radius: 12px;
-        padding: 16px;
-        margin-bottom: 24px;
+        border: 1px solid rgba(239, 68, 68, 0.3) !important;
+        border-radius: 8px !important;
+        padding: 16px !important;
+        margin-bottom: 16px !important;
         font-size: 14px;
         line-height: 1.5;
     }
     
     .safety-alert-green {
-        background-color: rgba(16, 185, 129, 0.12) !important;
-        color: #a7f3d0 !important;
-        border: 2px solid rgba(16, 185, 129, 0.4) !important;
-        border-radius: 12px;
-        padding: 12px 16px;
-        margin-bottom: 24px;
-        font-size: 13px;
+        background-color: rgba(143, 179, 148, 0.1) !important;
+        color: #8fb394 !important;
+        border: 1px solid rgba(143, 179, 148, 0.3) !important;
+        border-radius: 8px !important;
+        padding: 16px !important;
+        margin-bottom: 16px !important;
+        font-size: 14px;
+        line-height: 1.5;
     }
     
     .registry-note-card {
-        background-color: rgba(143, 179, 148, 0.08) !important;
-        border-left: 4px solid #8fb394 !important;
-        padding: 16px;
-        border-radius: 4px 12px 12px 4px;
-        margin-top: 15px;
-        font-size: 13px;
+        background-color: rgba(184, 155, 240, 0.08) !important;
+        border-left: 4px solid #b89bf0 !important;
+        padding: 16px !important;
+        border-radius: 4px 8px 8px 4px !important;
+        margin-top: 16px !important;
+        margin-bottom: 16px !important;
+        font-size: 14px;
         line-height: 1.5;
     }
     
@@ -339,7 +396,7 @@ st.markdown(
 st.markdown(
     """
     <div style='text-align: center; margin-top: 10px; margin-bottom: 30px;'>
-        <h1 style='font-size: 40px; font-weight: 800; margin-bottom: 0px; background: linear-gradient(90deg, #ffffff, #e2e8f0, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>
+        <h1 style='font-size: 40px; font-weight: 800; margin-bottom: 0px; background: linear-gradient(90deg, #8fb394, #cbd5e1, #b89bf0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>
             🧬 Antigravity Genetics Dashboard
         </h1>
         <p style='color: #cbd5e1; font-size: 16px; font-weight: 400; margin-top: 5px; letter-spacing: 0.5px;'>
@@ -638,9 +695,6 @@ with col_left:
                     display_odds(scenario["odds"])
                     display_registry_notes(scenario["odds"])
             
-            # Add bottom padding inside the container
-            st.markdown("<div style='padding-bottom: 15px;'></div>", unsafe_allow_html=True)
-            
         # Spacer between results containers
         st.markdown("<div style='margin-bottom: 25px;'></div>", unsafe_allow_html=True)
         
@@ -705,7 +759,7 @@ with col_left:
 
 with col_right:
     # Agent Tracking Log layout
-    st.markdown("<div style='color: #8fb394; font-size: 18px; font-weight: bold; margin-bottom: 5px;'>🛰️ Antigravity Agent Tracking Log</div>", unsafe_allow_html=True)
+    st.subheader("🛰️ Antigravity Agent Tracking Log")
     st.caption("Active trace of the autonomous agent's genetic simulation pipeline")
     
     # Generate dynamic log events
@@ -781,52 +835,55 @@ with col_right:
         best_prob = results[best_pheno]
         logs.append((t_6, "success", f"Genetic analysis complete. Dominant predicted phenotype: {best_pheno} ({best_prob} probability)."))
     
-    # Build logs as HTML content with color theme
+    # Build logs as HTML content with color theme (high-contrast dark-theme colors)
     log_html_content = ""
     for timestamp, tag, message in logs:
-        # Determine tag color (darker version for white background contrast)
+        # Determine tag color matching the theme palette
         if tag == "thought":
-            tag_color = "#7c3aed"  # Purple accent
+            tag_color = "#b89bf0"  # Purple accent
         elif tag == "query":
-            tag_color = "#b45309"  # Amber
+            tag_color = "#fb923c"  # Amber
         elif tag == "comp":
-            tag_color = "#16a34a"  # Sage green
+            tag_color = "#8fb394"  # Sage green
         elif tag == "success":
-            tag_color = "#047857"  # Success emerald
+            tag_color = "#4ade80"  # Success emerald
         else: # action / info
-            tag_color = "#0369a1"  # Action blue
+            tag_color = "#38bdf8"  # Action sky blue
             
         log_html_content += (
-            f'<span style="color: #718096;">[{timestamp}]</span> '
-            f'<span style="color: {tag_color}; font-weight: bold;">[{tag}]</span> '
-            f'<span style="color: #2d3748;">{message}</span>\n'
+            f'<div class="log-line">'
+            f'<span class="log-time">[{timestamp}]</span>'
+            f'<span class="log-tag tag-{tag}">[{tag}]</span>'
+            f'<span class="log-text" style="color: #cbd5e1;">{message}</span>'
+            f'</div>'
         )
         
     # Active trailing prompt cursor
     cursor_time = t_now.strftime("%H:%M:%S.%f")[:-3]
     log_html_content += (
-        f'<span style="color: #718096;">[{cursor_time}]</span> '
-        f'<span style="color: #7c3aed; font-weight: bold;">[status]</span> '
-        f'<span style="color: #2d3748;">Agent listening for user adjustments... <span class="cursor-blink" style="color: #7c3aed;">█</span></span>'
+        f'<div class="log-line">'
+        f'<span class="log-time">[{cursor_time}]</span>'
+        f'<span class="log-tag tag-status">[status]</span>'
+        f'<span class="log-text" style="color: #cbd5e1;">Agent listening for user adjustments... <span class="cursor-blink" style="color: #b89bf0;">█</span></span>'
+        f'</div>'
     )
     
     # Render the logs cleanly inside st.container(border=True) using a custom styled HTML container
     with st.container(border=True):
         log_html = f"""
         <div style="
-            background-color: #ffffff;
+            background-color: #121414;
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
-            padding: 15px 15px 35px 15px;
+            padding: 24px !important;
             border-radius: 8px;
             min-height: 680px;
             max-height: 680px;
             overflow-y: auto;
             white-space: pre-wrap;
             word-wrap: break-word;
-            border: 1px solid #cbd5e1;
+            border: 1px solid rgba(143, 179, 148, 0.2);
             line-height: 1.6;
-            margin-bottom: 40px;
         ">{log_html_content}</div>
         """
         st.markdown(log_html, unsafe_allow_html=True)
