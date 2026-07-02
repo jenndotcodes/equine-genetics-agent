@@ -811,15 +811,16 @@ with col_right:
             background-color: #ffffff;
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
-            padding: 15px;
+            padding: 15px 15px 35px 15px;
             border-radius: 8px;
-            min-height: 480px;
-            max-height: 600px;
+            min-height: 680px;
+            max-height: 680px;
             overflow-y: auto;
             white-space: pre-wrap;
             word-wrap: break-word;
             border: 1px solid #cbd5e1;
             line-height: 1.6;
+            margin-bottom: 40px;
         ">{log_html_content}</div>
         """
         st.markdown(log_html, unsafe_allow_html=True)
