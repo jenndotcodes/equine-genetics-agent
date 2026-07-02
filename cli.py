@@ -38,6 +38,10 @@ def parse_profile(profile_str: str) -> list:
     return parts
 
 def main():
+    """
+    Main CLI entrypoint. Parses --sire and --dam inputs, computes probabilities,
+    and prints results or veterinary safety warnings.
+    """
     parser = argparse.ArgumentParser(
         description="Equine Inheritance Simulator CLI - Compute offspring coat color probabilities."
     )
