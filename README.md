@@ -17,6 +17,9 @@ The workspace is organized as follows:
 │       │   └── SKILL.md          # Primary genetics engine tool specifications (v3.0.0)
 │       └── critique/
 │           └── SKILL.md          # Critique validation rules & safety instructions
+├── tests/
+│   ├── test_genetics.py          # Unit tests for Mendelian crossovers & safety validation
+│   └── test_integration.py       # Integration tests validating pipeline execution & timeouts
 ├── tools/
 │   ├── genetics_engine.py        # 9-loci Punnett square logic & context retriever
 │   └── critique_agent.py         # Safety auditor checking for lethal genetic crosses
