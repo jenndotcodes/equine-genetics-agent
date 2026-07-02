@@ -606,6 +606,12 @@ with col_left:
             st.subheader("Foal Phenotype Probabilities")
             
             def display_odds(odds_dict: dict):
+                """
+                Renders a styled custom progress bar for each computed phenotype probability.
+                
+                Parameters:
+                    odds_dict (dict): A dictionary of phenotype names mapped to probability strings.
+                """
                 # Sort odds descending
                 sorted_odds = sorted(odds_dict.items(), key=lambda x: float(x[1].replace("%", "")), reverse=True)
                 for pheno, prob_str in sorted_odds:
@@ -640,6 +646,13 @@ with col_left:
                     )
 
             def display_registry_notes(odds_dict: dict):
+                """
+                Retrieves and displays historical context and registry rules 
+                associated with alleles in the active calculated probabilities.
+                
+                Parameters:
+                    odds_dict (dict): A dictionary of phenotype names mapped to probability strings.
+                """
                 notes_shown = set()
                 for pheno in odds_dict.keys():
                     pheno_notes = retrieve_breed_registry_notes(pheno)

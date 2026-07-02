@@ -39,31 +39,44 @@ GENETIC_COLORS = {
 
 def split_genotype(genotype: str) -> Tuple[str, str]:
     """
-    Splits a genotype string into its two component alleles.
-    Correctly handles multi-character allele designations (e.g., 'Cr', 'Ch', 'prl').
+    Deconstructs a two-allele genotype string into its two component alleles.
+    Accurately manages multi-character alleles (e.g., 'Cr', 'Ch', 'prl') alongside standard single characters.
+    
+    Parameters:
+        genotype (str): The genotype representing a specific locus (e.g., "Ee", "Crn", "CrCr").
+        
+    Returns:
+        Tuple[str, str]: A tuple containing the two segregated alleles.
     """
     if genotype in ("CrCr", "ChCh", "prlprl"):
         half = len(genotype) // 2
         return genotype[:half], genotype[half:]
     elif genotype.endswith("n") and genotype != "nn":
-        # e.g., "Crn", "Chn", "prln", "Dn", "Zn", "Gn", "On"
+        # Segregate carriers from wild-type (e.g., "Crn" -> "Cr" and "n")
         return genotype[:-1], "n"
     else:
-        # Standard 2-character (e.g. "EE", "Ee", "ee", "AA", "Aa", "aa", "nn")
+        # Standard 2-character alleles (e.g. "EE" -> "E" and "E")
         return genotype[0], genotype[1]
 
 
 def sort_alleles(al1: str, al2: str) -> List[str]:
     """
-    Sorts two alleles so that dominant/capitalized alleles come first, 
-    and wild-type/non-carrier ('n') comes last.
+    Sorts two segregated alleles by biological precedence: dominant/mutant alleles first, 
+    and recessive wild-type ('n') alleles last.
+    
+    Parameters:
+        al1 (str): First allele.
+        al2 (str): Second allele.
+        
+    Returns:
+        List[str]: A list of sorted alleles, e.g., ["E", "e"] or ["Cr", "n"].
     """
     if al1 == "n":
         return [al2, al1]
     if al2 == "n":
         return [al1, al2]
     if al1.lower() == al2.lower():
-        # E.g., 'e' and 'E' -> 'E', 'e'
+        # Handle cases like 'e' and 'E' -> dominant 'E' comes first
         if al1.isupper():
             return [al1, al2]
         else:
@@ -74,10 +87,16 @@ def sort_alleles(al1: str, al2: str) -> List[str]:
 # DETERMINISTIC AGENT TOOLS
 # ==============================================================================
 
-def run_punnett_square(parent1: str, parent2: str) -> list:
+def run_punnett_square(parent1: str, parent2: str) -> List[str]:
     """
-    Computes a standard 2x2 Punnett square cross for a single gene.
-    Correctly handles multi-character alleles.
+    Executes a standard 2x2 Punnett square Mendelian crossover logic for a single locus.
+    
+    Parameters:
+        parent1 (str): Genotype of the first parent (e.g., "Ee").
+        parent2 (str): Genotype of the second parent (e.g., "ee").
+        
+    Returns:
+        List[str]: A list of all four possible offspring genotypes from this cross.
     """
     p1_a1, p1_a2 = split_genotype(parent1)
     p2_a1, p2_a2 = split_genotype(parent2)
@@ -92,19 +111,37 @@ def run_punnett_square(parent1: str, parent2: str) -> list:
 
 def get_phenotype(g: dict) -> str:
     """
-    Applies biological epistasis, dilution interactions, and grey/overo masking rules.
+    Resolves the visual phenotype of a horse by running its 9-locus genotype 
+    through sequential epistatic masks, dilution interactions, and patterns.
+    
+    Order of Epistatic Precedence:
+      1. Lethal White Syndrome (Homozygous Overo OO check)
+      2. Base Coat Determination (Extension & Agouti)
+      3. Cream & Pearl Dilution (Co-dominant interaction model)
+      4. Champagne Dilution (Dominant modifier)
+      5. Dun Dilution (Dominant dilution with primitive markings)
+      6. Silver Modifier (Dominant modifier targeting black pigment only)
+      7. Frame Overo Pattern (Heterozygous white spotting)
+      8. Progressive Greying Mask (Dominant grey mask over born color)
+      
+    Parameters:
+        g (dict): A dictionary containing keys "E", "A", "Cr", "D", "Z", "Ch", "prl", "G", "O" 
+                  mapped to their corresponding genotypes.
+                  
+    Returns:
+        str: Human-readable phenotype name.
     """
     # 1. Lethal White Syndrome (Fatal)
-    # Homozygous Overo (OO) is fatal at birth
+    # Homozygous Overo (OO) leads to incomplete intestinal development and is fatal at birth.
     if g["O"] == "OO":
         return "Lethal White Syndrome (Fatal)"
         
     # Determine base color
-    # Extension: EE/Ee = black base, ee = red base
+    # Extension: EE/Ee = black base pigment, ee = red base pigment (Chestnut)
     is_black_base = g["E"] in ("EE", "Ee")
     
     if is_black_base:
-        # Agouti: AA/Aa = Bay, aa = Solid Black
+        # Agouti: AA/Aa restricts black pigment to points (Bay), aa leaves horse Solid Black
         is_bay = g["A"] in ("AA", "Aa")
         base = "Bay" if is_bay else "Solid Black"
     else:
@@ -112,7 +149,7 @@ def get_phenotype(g: dict) -> str:
         
     color = base
     
-    # 2. Cream (Cr) and Pearl (prl) Dilutions
+    # 2. Cream (Cr) and Pearl (prl) Dilutions (Co-dominant locus interaction)
     has_double_pearl = g["prl"] == "prlprl"
     has_single_pearl = g["prl"] == "prln"
     has_double_cream = g["Cr"] == "CrCr"
@@ -126,6 +163,7 @@ def get_phenotype(g: dict) -> str:
         else:
             color = "Black Pearl"
     elif has_single_pearl and has_single_cream:
+        # Cream and Pearl interact co-dominantly to create pseudodiploid dilution phenotypes
         if base == "Chestnut":
             color = "Chestnut Cream-Pearl"
         elif base == "Bay":
@@ -184,7 +222,7 @@ def get_phenotype(g: dict) -> str:
             color = f"{color} Dun"
             
     # 5. Silver Modifier (Dominant Z)
-    # Silver only affects genotypes with a black base (EE or Ee)
+    # Silver only affects eumelanin (black base) and is hidden on pheomelanin (red/chestnut)
     has_silver = g["Z"] in ("ZZ", "Zn")
     if has_silver and is_black_base:
         if color == "Bay":
@@ -203,11 +241,12 @@ def get_phenotype(g: dict) -> str:
             color = f"Silver {color}"
             
     # 6. Patterns: Frame Overo (On)
+    # Adds white patches to the horse's coat (spotted layout)
     if g["O"] == "On":
         color = f"{color} Frame Overo"
         
     # 7. Grey Mask (Dominant G)
-    # Progressive whitening occurs. Returns Grey (Born [Base/Diluted Color])
+    # Progressive greying overrides all visual coat colors over time
     has_grey = g["G"] in ("GG", "Gn")
     if has_grey:
         color = f"Grey (Born {color})"
@@ -220,9 +259,18 @@ def calculate_foal_probabilities(
     dam_E: str, dam_A: str, dam_Cr: str, dam_D: str, dam_Z: str, dam_Ch: str, dam_prl: str, dam_G: str, dam_O: str
 ) -> dict:
     """
-    Crosses two multi-gene profiles across all 9 loci simultaneously to calculate foal phenotype percentages.
+    Simulates multi-locus Mendelian segregation and inheritance across all 9 loci 
+    simultaneously, mapping the final probability distribution of all possible foal phenotypes.
+    
+    Parameters:
+        sire_E to sire_O (str): Genotypes of the sire at all 9 loci.
+        dam_E to dam_O (str): Genotypes of the dam at all 9 loci.
+        
+    Returns:
+        dict: A dictionary mapping resolved phenotype strings to their percentage probabilities
+              (e.g., {"Bay": "37.5%", "Cremello": "12.5%"}).
     """
-    # Run independent crosses
+    # Run independent Mendelian crosses for all nine loci
     e_res = run_punnett_square(sire_E, dam_E)
     a_res = run_punnett_square(sire_A, dam_A)
     cr_res = run_punnett_square(sire_Cr, dam_Cr)
@@ -233,12 +281,12 @@ def calculate_foal_probabilities(
     g_res = run_punnett_square(sire_G, dam_G)
     o_res = run_punnett_square(sire_O, dam_O)
     
-    # Step-by-step state probability expansion to aggregate combinations efficiently
+    # Efficiently aggregate combination probabilities using state expansion (Cartesian product)
     states = {(): 1.0}
     loci_results = [e_res, a_res, cr_res, d_res, z_res, ch_res, prl_res, g_res, o_res]
     
     for locus_res in loci_results:
-        # Determine genotype probabilities for the locus
+        # Calculate frequency weights of each segregated genotype option
         locus_counts = {}
         for gen in locus_res:
             locus_counts[gen] = locus_counts.get(gen, 0) + 0.25
@@ -251,7 +299,7 @@ def calculate_foal_probabilities(
                 new_states[new_tuple] = new_states.get(new_tuple, 0.0) + new_prob
         states = new_states
         
-    # Map genotypes to phenotypes and sum probabilities
+    # Translate final multi-locus genotypes into phenotypes, summing up probabilities of matches
     phenotype_probs = {}
     for genotype_tuple, prob in states.items():
         g_dict = {
@@ -280,8 +328,17 @@ def handle_unknown_parent(
     unknown_parent_type: str = "stallion"
 ) -> list:
     """
-    Invoked when either sire or dam is unknown. Checks parallel baseline trajectories.
-    Genotypes at the other 7 modifier loci are set to standard wild-type 'nn' (non-diluted, non-spotted, non-grey).
+    Evaluates probability trajectories when one parent is unknown. Computes crosses
+    against three common baseline genotypes (Bay, Black, Chestnut) for the missing parent.
+    All other modifier loci for the unknown parent default to wild-type 'nn' (unmodified).
+    
+    Parameters:
+        known_E to known_O (str): Known parent genotypes.
+        unknown_parent_type (str): "stallion" (sire is unknown) or "mare" (dam is unknown).
+        
+    Returns:
+        list: A list of dictionaries representing trajectory scenarios:
+              [{"profile": "Bay (Ee_Aa)", "odds": {...}}, ...]
     """
     mystery_profiles = [
         {"name": "Bay (Ee_Aa)", "E": "Ee", "A": "Aa", "Cr": "nn", "D": "nn", "Z": "nn", "Ch": "nn", "prl": "nn", "G": "nn", "O": "nn"},
@@ -320,8 +377,14 @@ def handle_unknown_parent(
 
 def retrieve_breed_registry_notes(phenotype: str) -> dict:
     """
-    Retrieves grounded historical/biological documentation from breed_registry_notes.json
-    based on keywords matched inside the computed phenotype.
+    Queries breed_registry_notes.json to retrieve historical and biological 
+    descriptions/notes associated with alleles identified in the final phenotype.
+    
+    Parameters:
+        phenotype (str): Resolved coat phenotype (e.g., "Silver Bay Dun Frame Overo").
+        
+    Returns:
+        dict: A dictionary containing matched registry rules and historical details.
     """
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     notes_path = os.path.join(base_dir, "breed_registry_notes.json")
@@ -339,7 +402,7 @@ def retrieve_breed_registry_notes(phenotype: str) -> dict:
     
     for key, data in notes.items():
         k_lower = key.lower()
-        # Perform explicit matches for specific modifiers
+        # Perform matches for specific modifiers
         if k_lower == "grey" and "grey" in p_lower:
             matched_notes[key] = data
         elif k_lower == "silver" and "silver" in p_lower:
