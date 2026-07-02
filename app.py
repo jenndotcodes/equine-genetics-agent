@@ -789,11 +789,11 @@ with col_right:
     # Build logs as clean, plain text
     log_text = ""
     for timestamp, tag, message in logs:
-        log_text += f"[{timestamp}] [{tag}] {message}\n\n"
+        log_text += f"[{timestamp}] [{tag}] {message}\n"
         
     # Active trailing prompt cursor
     cursor_time = t_now.strftime("%H:%M:%S.%f")[:-3]
     log_text += f"[{cursor_time}] [status] Agent listening for user adjustments..."
     
-    # Render the logs as clean, plain text
-    st.markdown(log_text)
+    # Render the logs cleanly inside a bash code block representing a terminal monitor
+    st.code(log_text, language='bash')
