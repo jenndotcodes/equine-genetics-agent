@@ -98,9 +98,9 @@ st.markdown(
         color: #f0f3f1 !important;
     }
 
-    /* High contrast widget labels */
+    /* High contrast widget labels styled in sage green */
     label, [data-testid="stWidgetLabel"] p {
-        color: #f0f3f1 !important;
+        color: #8fb394 !important;
         font-weight: 700 !important;
         font-size: 14px !important;
         letter-spacing: 0.3px;
