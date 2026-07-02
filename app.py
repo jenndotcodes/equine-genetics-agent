@@ -677,7 +677,7 @@ with col_left:
                         f'<tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">'
                         f'<td style="padding: 10px 0; font-weight: 700; color: #ffffff;">{name}</td>'
                         f'<td style="padding: 10px 0; font-family: \'JetBrains Mono\', monospace; color: #cbd5e1;">{s_val} × {d_val}</td>'
-                        f'<td style="padding: 10px 0; text-align: right; font-weight: bold; color: #38bdf8;">{", ".join(outcome_strs)}</td>'
+                        f'<td style="padding: 10px 0; text-align: right; font-weight: bold; color: #b89bf0;">{", ".join(outcome_strs)}</td>'
                         f'</tr>'
                     )
                     
@@ -775,21 +775,40 @@ with col_right:
         best_prob = results[best_pheno]
         logs.append((t_6, "success", f"Genetic analysis complete. Dominant predicted phenotype: {best_pheno} ({best_prob} probability)."))
     
-    # Build logs as clean, plain text
-    log_text = ""
+    # Build logs as HTML content with color theme
+    log_html_content = ""
     for timestamp, tag, message in logs:
-        log_text += f"[{timestamp}] [{tag}] {message}\n"
+        # Determine tag color (darker version for white background contrast)
+        if tag == "thought":
+            tag_color = "#7c3aed"  # Purple accent
+        elif tag == "query":
+            tag_color = "#b45309"  # Amber
+        elif tag == "comp":
+            tag_color = "#16a34a"  # Sage green
+        elif tag == "success":
+            tag_color = "#047857"  # Success emerald
+        else: # action / info
+            tag_color = "#0369a1"  # Action blue
+            
+        log_html_content += (
+            f'<span style="color: #718096;">[{timestamp}]</span> '
+            f'<span style="color: {tag_color}; font-weight: bold;">[{tag}]</span> '
+            f'<span style="color: #2d3748;">{message}</span>\n'
+        )
         
     # Active trailing prompt cursor
     cursor_time = t_now.strftime("%H:%M:%S.%f")[:-3]
-    log_text += f"[{cursor_time}] [status] Agent listening for user adjustments..."
+    log_html_content += (
+        f'<span style="color: #718096;">[{cursor_time}]</span> '
+        f'<span style="color: #7c3aed; font-weight: bold;">[status]</span> '
+        f'<span style="color: #2d3748;">Agent listening for user adjustments... <span class="cursor-blink" style="color: #7c3aed;">█</span></span>'
+    )
     
     # Render the logs cleanly inside st.container(border=True) using a custom styled HTML container
     with st.container(border=True):
         log_html = f"""
         <div style="
             background-color: #ffffff;
-            color: #1e2222;
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
             padding: 15px;
@@ -800,6 +819,7 @@ with col_right:
             white-space: pre-wrap;
             word-wrap: break-word;
             border: 1px solid #cbd5e1;
-        ">{log_text}</div>
+            line-height: 1.6;
+        ">{log_html_content}</div>
         """
         st.markdown(log_html, unsafe_allow_html=True)

@@ -3,3 +3,6 @@ primaryColor = "#8fb394"
 backgroundColor = "#1e2222"
 secondaryBackgroundColor = "#282c2c"
 textColor = "#f0f3f1"
+
+# Sage green and grey motif with a complimentary purple accent shade
+purpleAccent = "#b89bf0"
