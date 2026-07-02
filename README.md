@@ -27,6 +27,7 @@ The workspace is organized as follows:
 ├── breed_registry_notes.json     # Grounded biological and historical reference data
 ├── deploy.sh                     # Google Cloud Run deployment script
 ├── Dockerfile                    # Containerization script for production environment
+├── mcp_server.py                 # Standalone Model Context Protocol (MCP) server
 ├── requirements.txt              # Project package dependencies
 └── README.md                     # Project documentation (this file)
 ```
@@ -36,6 +37,7 @@ The workspace is organized as follows:
 - **Genetics Engine (`tools/genetics_engine.py`)**: The deterministic backbone. It computes Mendelian 2x2 Punnett crossovers for all nine loci individually (`E`, `A`, `Cr`, `D`, `Z`, `Ch`, `prl`, `G`, `O`) and aggregates them into a probability matrix representing up to $262,144$ possible genotypes.
 - **Critique Agent (`tools/critique_agent.py`)**: An validation layer that intercepts calculated probability payloads. It runs safety audits to flag hazardous crosses—such as the homozygous Frame Overo (`OO`) Lethal White Syndrome (LWS) condition—and blocks standard outputs to return high-priority veterinary warnings.
 - **Breed Registry Notes (`breed_registry_notes.json`)**: A database of historical and registry information matched dynamically against resolved offspring phenotypes.
+- **MCP Server (`mcp_server.py`)**: Exposes genetics computation tools and safety compliance standards over the Model Context Protocol (MCP) using the `mcp` SDK.
 
 ---
 
