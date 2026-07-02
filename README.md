@@ -30,6 +30,7 @@ The workspace is organized as follows:
 ├── Dockerfile                    # Containerization script for production environment
 ├── mcp_server.py                 # Standalone Model Context Protocol (MCP) server
 ├── requirements.txt              # Project package dependencies
+├── WRITEUP.md                    # Project write-up and competition details
 └── README.md                     # Project documentation (this file)
 ```
 
