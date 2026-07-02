@@ -88,19 +88,19 @@ st.markdown(
     /* Global fonts and dark background override */
     html, body, [class*="css"] {
         font-family: 'Outfit', sans-serif;
-        color: #f8fafc !important; /* Soft white for body text */
+        color: #f0f3f1 !important; /* Soft white matching theme textColor */
     }
 
-    /* Force medium grey background across app container elements */
+    /* Force background color matching theme backgroundColor across app container elements */
     .stApp, .main, [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stToolbar"] {
-        background-color: #2d3139 !important;
-        background: #2d3139 !important;
-        color: #f8fafc !important;
+        background-color: #1e2222 !important;
+        background: #1e2222 !important;
+        color: #f0f3f1 !important;
     }
 
     /* High contrast widget labels */
     label, [data-testid="stWidgetLabel"] p {
-        color: #ffffff !important;
+        color: #f0f3f1 !important;
         font-weight: 700 !important;
         font-size: 14px !important;
         letter-spacing: 0.3px;
@@ -123,8 +123,8 @@ st.markdown(
         font-size: 22px;
         font-weight: 700;
         margin-bottom: 20px;
-        color: #ffffff !important;
-        border-bottom: 2px solid #03a9f4;
+        color: #f0f3f1 !important;
+        border-bottom: 2px solid #8fb394;
         padding-bottom: 8px;
         letter-spacing: 0.5px;
     }
@@ -134,8 +134,8 @@ st.markdown(
         font-weight: 700;
         margin-top: 20px;
         margin-bottom: 12px;
-        color: #ffffff !important;
-        border-left: 4px solid #03a9f4;
+        color: #f0f3f1 !important;
+        border-left: 4px solid #8fb394;
         padding-left: 10px;
     }
 
@@ -315,8 +315,8 @@ st.markdown(
     }
     
     .registry-note-card {
-        background-color: rgba(3, 169, 244, 0.08) !important;
-        border-left: 4px solid #03a9f4 !important;
+        background-color: rgba(143, 179, 148, 0.08) !important;
+        border-left: 4px solid #8fb394 !important;
         padding: 16px;
         border-radius: 4px 12px 12px 4px;
         margin-top: 15px;
@@ -326,7 +326,7 @@ st.markdown(
     
     .registry-note-title {
         font-weight: 700;
-        color: #ffffff !important;
+        color: #f0f3f1 !important;
         margin-bottom: 6px;
     }
     
