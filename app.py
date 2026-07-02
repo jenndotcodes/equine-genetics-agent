@@ -1,6 +1,11 @@
 import streamlit as st
 import datetime
 import time
+
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from tools.genetics_engine import (
     calculate_foal_probabilities,
     handle_unknown_parent,
