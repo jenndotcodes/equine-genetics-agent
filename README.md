@@ -1,4 +1,6 @@
 # Equine Genetics Agent & Simulation Infrastructure
+## Written by Jennifer Bailey
+## July 5, 2026
 
 An advanced biological simulation dashboard and multi-agent verification system designed to compute offspring coat color inheritance probabilities in horses, audit compliance safety, and retrieve grounded historical registry guidelines.
 
