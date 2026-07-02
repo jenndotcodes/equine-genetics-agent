@@ -1,10 +1,13 @@
 import streamlit as st
 import datetime
 import time
-
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# Force the project root directory to the absolute top of Python's search paths
+project_root = os.path.dirname(os.path.abspath(__file__))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 from tools.genetics_engine import (
     calculate_foal_probabilities,
