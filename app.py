@@ -786,43 +786,14 @@ with col_right:
         best_prob = results[best_pheno]
         logs.append((t_6, "success", f"Genetic analysis complete. Dominant predicted phenotype: {best_pheno} ({best_prob} probability)."))
     
-    # Build logs HTML
-    log_rows_html = ""
+    # Build logs as clean, plain text
+    log_text = ""
     for timestamp, tag, message in logs:
-        log_rows_html += f"""
-        <div class="log-line">
-            <span class="log-time">[{timestamp}]</span>
-            <span class="log-tag tag-{tag}">{tag}</span>
-            <span class="log-text">{message}</span>
-        </div>
-        """
+        log_text += f"[{timestamp}] [{tag}] {message}\n\n"
         
     # Active trailing prompt cursor
     cursor_time = t_now.strftime("%H:%M:%S.%f")[:-3]
-    log_rows_html += f"""
-    <div class="log-line" style="margin-top: 15px;">
-        <span class="log-time">[{cursor_time}]</span>
-        <span class="log-tag tag-thought" style="background-color: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); font-weight:700;">status</span>
-        <span class="log-text" style="color:#cbd5e1;">Agent listening for user adjustments... <span class="cursor-blink">█</span></span>
-    </div>
-    """
+    log_text += f"[{cursor_time}] [status] Agent listening for user adjustments..."
     
-    # Render the styled terminal window
-    st.markdown(
-        f"""
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-dots">
-                    <div class="terminal-dot dot-red"></div>
-                    <div class="terminal-dot dot-yellow"></div>
-                    <div class="terminal-dot dot-green"></div>
-                </div>
-                <div class="terminal-title">antigravity-agent@foal-simulator: ~</div>
-            </div>
-            <div class="terminal-body">
-                {log_rows_html}
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    # Render the logs as clean, plain text
+    st.markdown(log_text)
