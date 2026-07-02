@@ -79,7 +79,15 @@ Intercepts output payloads to enforce safety guidelines:
 
 ---
 
-## 📦 Production Deployment
+## 🧪 Automated Testing Suite
+
+The project includes unit and integration tests built using `pytest` to guarantee calculation accuracy and performance metrics.
+
+### Run Tests
+To execute the entire test suite locally, run:
+```bash
+pytest tests/
+```
 
 ### 1. Streamlit Community Cloud
 To host this project on Streamlit Community Cloud:
