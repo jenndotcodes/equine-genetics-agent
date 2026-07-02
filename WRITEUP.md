@@ -24,43 +24,23 @@ This platform introduces an advanced, completely decoupled multi-agent pipeline 
 ## 2. Multi-Agent System Architecture & Multi-Surface Delivery
 The software layout is explicitly decoupled following the industry-standard **Separation of Concerns** principle. This isolates the core mathematical calculations from presentation and safety layers, ensuring the application remains robust, scalable, and easy to extend.
 
-
-```
-
-[ INPUT SURFACES ]
-├── Web Dashboard (app.py on Cloud Run)
-├── Headless Terminal CLI (cli.py)
-└── Agent Integration Server (mcp_server.py)
-│
-▼
-[ CORE PROCESSING PIPELINE ]
-│
-├──► 1. DETERMINISTIC GENETICS ENGINE (tools/genetics_engine.py)
-│     ├── Processes 9 independent loci simultaneously
-│     └── Computes up to 262,144 crossover outcomes
-│
-│ (Passes Raw Calculation Payload)
-▼
-├──► 2. AUTONOMOUS CRITIQUE AGENT (tools/critique_agent.py)
-├── Intercepts data payload before output presentation
-└── Audits matrix arrays for homozygous Frame Overo (OO) pairs
-│
-│ (Evaluates Pipeline Security)
-▼
-[ CONDITIONAL OUTPUT SURFACES ]
-├──► IF LWS HAZARD DETECTED:
-│     ├── Overrides normal presentation data stream
-│     ├── Injects high-priority Red Veterinary Warning
-│     └── Blocks generation of standard phenotype outputs
-│
-└──► IF BREEDING CROSS IS SAFE:
-└── Renders standard metrics, CLI tables, or raw JSON
+### System Data Flow Matrix
+```mermaid
+graph TD
+    App[Streamlit App app.py] --> Engine[Genetics Engine tools/genetics_engine.py]
+    CLI[argparse CLI cli.py] --> Engine
+    MCP[MCP Server mcp_server.py] --> Engine
+    Engine --> Critique[Critique Agent tools/critique_agent.py]
+    Engine --> Notes[Breed Notes breed_registry_notes.json]
+    Critique --> Safety[Breeding Safety Audit Output]
 
 ```
 
 ### Core Ecosystem Components:
+
 * **The Interface Layer (`app.py`):** Handles input configuration (selecting dam and sire alleles across nine loci), tracks state progress indicators, and structures visual text reports. It acts strictly as a presentation surface.
 * **The Deterministic Genetics Engine (`tools/genetics_engine.py`):** This component acts as the mathematical core. It takes parental genetic arrays and computes independent Mendelian crossovers across 9 distinct loci simultaneously (Extension, Agouti, Cream, Dun, Silver, Champagne, Pearl, Grey, and Frame Overo). It accurately resolves complex biological epistasis—such as suppressing the visible expression of the Silver dilution (**Z**) if the base coat lacks black pigment (**ee**). The calculation scales dynamically to resolve up to **4^9 = 262,144** potential genomic outcomes.
+* **The Breed Registry Metadata (`breed_registry_notes.json`):** Formulates the static reference boundaries parsed alongside mathematical calculations to contextualize phenotypic outputs against established biological registry standards.
 * **The Critique Agent Guardrail (`tools/critique_agent.py`):** Operating as an autonomous middleware interceptor, this agent captures the raw matrix payload before it can be output. It evaluates the data against critical safety guidelines. If it flags a non-zero probability of a homozygous Frame Overo (**OO**) pairing, it identifies it as a lethal mutation (**Lethal White Syndrome**). The agent automatically intercepts the data flow, blocks regular outputs, and injects a high-priority veterinary warning.
 
 ---
@@ -70,12 +50,16 @@ The software layout is explicitly decoupled following the industry-standard **Se
 To move beyond a simple web app prototype, the ecosystem expands interoperability through two decoupled interaction interfaces, engineered using natural language workflows inside the **Antigravity IDE**:
 
 ### Model Context Protocol Server (`mcp_server.py`)
+
 To expose our genetic infrastructure universally to modern LLM orchestrators and developer workspaces, the repository packages an open standard **MCP Server** built with the standard Python `mcp` SDK. It runs locally via a standardized `stdio` transport layer, exposing:
+
 * **Tools (`calculate_equine_genetics`):** Allows external agent workflows to programmatically submit parent profiles and receive structured multi-loci calculation arrays.
 * **Resources (`equine://standards/lethal-white`):** Provides a standardized context stream that external models can read to dynamically fetch current veterinary compliance and breed registry safety metrics.
 
 ### Agent Skills & Headless Terminal CLI (`cli.py`)
+
 To fulfill headless environment automation and terminal-first workflows, a standalone interface tool was created using Python's built-in `argparse` library. Running the command:
+
 ```bash
 python cli.py --dam [alleles] --sire [alleles]
 
@@ -130,4 +114,3 @@ tests/
 
 * **Unit Testing Mathematical Accuracy (`tests/test_genetics.py`):** Asserts that the deterministic engine splits alleles and builds combined probabilities flawlessly according to true Mendelian frequencies. It intentionally injects high-risk crosses (e.g., Frame Overo carriers) to verify that the Critique Agent properly triggers safety alarms.
 * **Integration & Timeout Benchmarking (`tests/test_integration.py`):** Simulates headless interface interactions using Streamlit's native headless testing framework (`st.testing.v1.AppTest`). It programmatically clocks pipeline executions to guarantee that the multi-agent workflow completes well under the strict 15-second Cloud Run deployment timeout.
-
