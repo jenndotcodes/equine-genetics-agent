@@ -699,7 +699,7 @@ with col_left:
 
 with col_right:
     # Agent Tracking Log layout
-    st.subheader("🛰️ Antigravity Agent Tracking Log")
+    st.markdown("<div style='color: #8fb394; font-size: 18px; font-weight: bold; margin-bottom: 5px;'>🛰️ Antigravity Agent Tracking Log</div>", unsafe_allow_html=True)
     st.caption("Active trace of the autonomous agent's genetic simulation pipeline")
     
     # Generate dynamic log events
