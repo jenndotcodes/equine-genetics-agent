@@ -1,6 +1,7 @@
 # tools/genetics_engine.py
 import os
 import json
+import streamlit as st
 from typing import Dict, Tuple, List
 
 # ==============================================================================
@@ -254,6 +255,7 @@ def get_phenotype(g: dict) -> str:
     return color
 
 
+@st.cache_data
 def calculate_foal_probabilities(
     sire_E: str, sire_A: str, sire_Cr: str, sire_D: str, sire_Z: str, sire_Ch: str, sire_prl: str, sire_G: str, sire_O: str,
     dam_E: str, dam_A: str, dam_Cr: str, dam_D: str, dam_Z: str, dam_Ch: str, dam_prl: str, dam_G: str, dam_O: str
@@ -375,6 +377,7 @@ def handle_unknown_parent(
 # BIOLOGICAL HISTORICAL DOCUMENT RETRIEVAL
 # ==============================================================================
 
+@st.cache_data
 def retrieve_breed_registry_notes(phenotype: str) -> dict:
     """
     Queries breed_registry_notes.json to retrieve historical and biological 
