@@ -893,3 +893,55 @@ with col_right:
         "><div style="padding: 24px !important;">{log_html_content}</div></div>
         """
         st.markdown(log_html, unsafe_allow_html=True)
+
+    # Dynamic inline code simulation details string
+    sim_code = f"""# tools/genetics_engine.py - Under the Hood Punnett Logic
+
+# Selected Parent Genotypes (Dynamic)
+sire_alleles = {{
+    "Extension (E/e)": "{sire_E if not sire_unknown else 'Unknown'}",
+    "Agouti (A/a)": "{sire_A if not sire_unknown else 'Unknown'}",
+    "Cream (Cr)": "{sire_Cr if not sire_unknown else 'Unknown'}",
+    "Dun (D/d)": "{sire_D if not sire_unknown else 'Unknown'}",
+    "Silver (Z/z)": "{sire_Z if not sire_unknown else 'Unknown'}",
+    "Champagne (Ch)": "{sire_Ch if not sire_unknown else 'Unknown'}",
+    "Pearl (prl)": "{sire_prl if not sire_unknown else 'Unknown'}",
+    "Grey (G/g)": "{sire_G if not sire_unknown else 'Unknown'}",
+    "Frame Overo (O)": "{sire_O if not sire_unknown else 'Unknown'}"
+}}
+
+dam_alleles = {{
+    "Extension (E/e)": "{dam_E if not dam_unknown else 'Unknown'}",
+    "Agouti (A/a)": "{dam_A if not dam_unknown else 'Unknown'}",
+    "Cream (Cr)": "{dam_Cr if not dam_unknown else 'Unknown'}",
+    "Dun (D/d)": "{dam_D if not dam_unknown else 'Unknown'}",
+    "Silver (Z/z)": "{dam_Z if not dam_unknown else 'Unknown'}",
+    "Champagne (Ch)": "{dam_Ch if not dam_unknown else 'Unknown'}",
+    "Pearl (prl)": "{dam_prl if not dam_unknown else 'Unknown'}",
+    "Grey (G/g)": "{dam_G if not dam_unknown else 'Unknown'}",
+    "Frame Overo (O)": "{dam_O if not dam_unknown else 'Unknown'}"
+}}
+
+def split_genotype(genotype: str) -> tuple:
+    # Correctly handles multi-character allele designations
+    if genotype in ("CrCr", "ChCh", "prlprl"):
+        half = len(genotype) // 2
+        return genotype[:half], genotype[half:]
+    elif genotype.endswith("n") and genotype != "nn":
+        return genotype[:-1], "n"
+    return genotype[0], genotype[1]
+
+def run_punnett_square(parent1: str, parent2: str) -> list:
+    # Computes standard Punnett square combinations
+    p1_a1, p1_a2 = split_genotype(parent1)
+    p2_a1, p2_a2 = split_genotype(parent2)
+    
+    combinations = []
+    for a1 in (p1_a1, p1_a2):
+        for a2 in (p2_a1, p2_a2):
+            combinations.append("".join(sorted([a1, a2])))
+    return combinations
+"""
+
+    with st.expander("🧬 View Underlying Code Simulation Logic", expanded=False):
+        st.code(sim_code, language="python")
