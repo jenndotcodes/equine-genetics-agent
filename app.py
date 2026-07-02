@@ -150,12 +150,11 @@ st.markdown(
         border-radius: 12px !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
         margin-bottom: 24px !important; /* Unified spacing margin */
-        padding: 24px !important; /* Force equal padding on the container itself to keep all sides uniform */
     }
 
     /* Adjust container padding to be exactly 24px on all 4 sides */
     div[data-testid="stVerticalBlockBorderWrapper"] > div {
-        padding: 0px !important;
+        padding: 24px !important;
     }
 
     /* High contrast widget labels styled in sage green */
@@ -885,6 +884,7 @@ with col_right:
             word-wrap: break-word;
             border: 1px solid rgba(143, 179, 148, 0.2);
             line-height: 1.6;
+            margin-bottom: 24px;
         "><div style="padding: 24px !important;">{log_html_content}</div></div>
         """
         st.markdown(log_html, unsafe_allow_html=True)
