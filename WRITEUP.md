@@ -90,6 +90,11 @@ python cli.py --dam [alleles] --sire [alleles]
 
 bypasses the graphical layer completely. It pipes inputs straight through the local backend engine and security guardrail, outputting clean, text-based phenotype tables or rendering sharp terminal alerts if Lethal White Syndrome bounds are breached.
 
+### Dynamic Input Sanitization & Incomplete Data Resolution
+To handle real-world breeding scenarios where genetic data may be incomplete (e.g., rescue animals or un-tested bloodlines), the CLI skill includes an intelligent data parsing layer. If a user passes `"unknown"` as the string argument for either the `--dam` or `--sire` profile, the interface layer intercepts the parameter before it hits the mathematical core. 
+
+Instead of throwing a fatal execution crash or a generic parsing error, the system dynamically treats the unknown parent as a fully heterozygous carrier across all unmapped loci. This intentional fallback ensures that the Critique Agent can still run a defensive, conservative safety audit on the remaining known parent's alleles, protecting the user from worst-case hereditary outcomes even when operating with missing data bounds.
+
 ---
 
 ## 5. Production Infrastructure & Performance Optimization
