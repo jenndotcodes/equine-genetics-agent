@@ -21,7 +21,30 @@ This platform introduces an advanced, completely decoupled multi-agent pipeline 
 
 ---
 
-## 2. Multi-Agent System Architecture & Multi-Surface Delivery
+## 2. Mathematical Mechanics & Algorithmic Scaling
+To bypass the computational bottlenecks of traditional graphical Punnett squares, the core mathematical engine transforms Mendelian inheritance laws into optimized vector transformations. 
+
+### Resolving the Combinatorial Space
+For a single heterozygous genetic locus (such as Ee x Ee), a standard Punnett square models a simple 2 x 2 matrix yielding a distribution ratio of 1:2:1 (25% EE, 50% Ee, 25% ee). When scaling across "n" independent loci, the combinatorial complexity expands exponentially following the formula:
+
+Total Genomic Combinations = 4^n
+
+When processing n = 9 independent loci simultaneously, modeling a single unified grid requires calculating and sorting through 4^9 = 262,144 cell allocations. 
+
+Instead of generating massive, sparse two-dimensional grids that consume significant memory overhead, the deterministic engine processes each locus as an isolated probability vector. It isolates the gamete segregation array for the Dam (D) and Sire (S) at a given locus, and computes their cross product locally to generate a simplified 3-element probability density distribution for that specific marker:
+
+Locus Probability = [Probability of Homozygous Dominant, Probability of Heterozygous, Probability of Homozygous Recessive]
+
+### The Tensor Product Transformation
+Once individual locus vectors are compiled, the system determines the global inheritance space by computing a sequence of tensor (Kronecker) products across all active distributions:
+
+Global Probability = Locus 1 x Locus 2 x ... x Locus 9
+
+This vector representation allows the calculation engine to efficiently determine the precise joint probabilities of multi-locus genotypes without heavy nested iteration tracking. The final probability array is then mapped against the biological rules engine (breed_registry_notes.json) to accurately evaluate cascading phenotypic traits and screen for lethal genetic boundaries.
+
+---
+
+## 3. Multi-Agent System Architecture & Multi-Surface Delivery
 The software layout is explicitly decoupled following the industry-standard **Separation of Concerns** principle. This isolates the core mathematical calculations from presentation and safety layers, ensuring the application remains robust, scalable, and easy to extend.
 
 ### System Data Flow Matrix
@@ -39,13 +62,13 @@ graph TD
 ### Core Ecosystem Components:
 
 * **The Interface Layer (`app.py`):** Handles input configuration (selecting dam and sire alleles across nine loci), tracks state progress indicators, and structures visual text reports. It acts strictly as a presentation surface.
-* **The Deterministic Genetics Engine (`tools/genetics_engine.py`):** This component acts as the mathematical core. It takes parental genetic arrays and computes independent Mendelian crossovers across 9 distinct loci simultaneously (Extension, Agouti, Cream, Dun, Silver, Champagne, Pearl, Grey, and Frame Overo). It accurately resolves complex biological epistasis—such as suppressing the visible expression of the Silver dilution (**Z**) if the base coat lacks black pigment (**ee**). The calculation scales dynamically to resolve up to **4^9 = 262,144** potential genomic outcomes.
+* **The Deterministic Genetics Engine (`tools/genetics_engine.py`):** This component acts as the mathematical core. It takes parental genetic arrays and computes independent Mendelian crossovers across 9 distinct loci simultaneously (Extension, Agouti, Cream, Dun, Silver, Champagne, Pearl, Grey, and Frame Overo). It accurately resolves complex biological epistasis—such as suppressing the visible expression of the Silver dilution (Z) if the base coat lacks black pigment (ee). The calculation scales dynamically to resolve up to **4^9 = 262,144** potential genomic outcomes.
 * **The Breed Registry Metadata (`breed_registry_notes.json`):** Formulates the static reference boundaries parsed alongside mathematical calculations to contextualize phenotypic outputs against established biological registry standards.
-* **The Critique Agent Guardrail (`tools/critique_agent.py`):** Operating as an autonomous middleware interceptor, this agent captures the raw matrix payload before it can be output. It evaluates the data against critical safety guidelines. If it flags a non-zero probability of a homozygous Frame Overo (**OO**) pairing, it identifies it as a lethal mutation (**Lethal White Syndrome**). The agent automatically intercepts the data flow, blocks regular outputs, and injects a high-priority veterinary warning.
+* **The Critique Agent Guardrail (`tools/critique_agent.py`):** Operating as an autonomous middleware interceptor, this agent captures the raw matrix payload before it can be output. It evaluates the data against critical safety guidelines. If it flags a non-zero probability of a homozygous Frame Overo (OO) pairing, it identifies it as a lethal mutation (**Lethal White Syndrome**). The agent automatically intercepts the data flow, blocks regular outputs, and injects a high-priority veterinary warning.
 
 ---
 
-## 3. Advanced Tooling Interoperability: MCP & Agent Skills
+## 4. Advanced Tooling Interoperability: MCP & Agent Skills
 
 To move beyond a simple web app prototype, the ecosystem expands interoperability through two decoupled interaction interfaces, engineered using natural language workflows inside the **Antigravity IDE**:
 
@@ -69,7 +92,7 @@ bypasses the graphical layer completely. It pipes inputs straight through the lo
 
 ---
 
-## 4. Production Infrastructure & Performance Optimization
+## 5. Production Infrastructure & Performance Optimization
 
 ### Google Cloud Run Deployment Architecture
 
@@ -101,7 +124,7 @@ When a user submits a specific parental genotype pairing, the results are memori
 
 ---
 
-## 5. Quality Assurance & Automated Testing
+## 6. Quality Assurance & Automated Testing
 
 To deliver a verified, enterprise-ready software asset, the repository integrates an automated testing suite powered by the `pytest` framework.
 
