@@ -8,7 +8,7 @@ echo "📍 Region: us-central1"
 echo "📦 Building and deploying from source..."
 
 # Deploy to Cloud Run
-gcloud run deploy equine-genetics-agent \
+gcloud run deploy equine-genetics-simulator \
   --source . \
   --region us-central1 \
   --timeout=15 \
